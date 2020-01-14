@@ -1,0 +1,17 @@
+<% layout('../layouts/mainlayout.ejs') -%>
+<br/><br/>
+<b>your Profile Detail</b>
+
+<form action="/User/Update" method="POST">
+        <table class="table">
+                <tr><td>username: </td>                <td><%= reqInfo.username %> <input type='hidden' name="username" value="<%= user.username %>" /> </td></tr>
+                <tr><td>email: </td>                   <td><%= reqInfo.email %> <input type='hidden' name="email" value="<%= user.email %>" /> </td></tr>
+                <tr><td>first name:</td>               <td><input type='text'  name="firstName" value="<%= user.firstName ? user.firstName : '' %>"  /></td></tr>
+                <tr><td>last name:</td>                <td><input type='text'  name="lastName" value="<%= user.lastName ? user.lastName : '' %>"  /></td></tr>
+                <tr><td>street address:</td>           <td><input type='text'  name="streetAddress" value="<%= user.streetAddress ? user.streetAddress : '' %>"  /></td></tr>
+                <tr><td>phone number:</td>             <td><input type='text'  name="phoneNumber" value="<%= user.phoneNumber ? user.phoneNumber : '' %>"  /></td></tr>
+                <tr><td><input type='hidden' name="password" value="<%= user.passowrd %>" /></td> 
+                    <td><button class="btn btn-primary" type="submit" value="Submit"> Submit</button></td></tr>
+        </table>
+</form>
+<%= errorMessage %>

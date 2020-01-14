@@ -1,0 +1,17 @@
+<% layout('../layouts/mainlayout.ejs') -%>
+<br/><br/>
+<b>Event Detail</b>
+
+<form action="/Event/Update" method="POST">
+    <table class="table">
+<tr><td>ID:</td>            <td><%= event._id %> <input type='hidden' name="_id" value="<%= event._id %>" /></td></tr>
+<tr><td>title:</td>         <td><input type='text'  name="title" value="<%= event.title ? event.title : '' %>"  /></td></tr>
+<tr><td>description:</td>   <td><input type='text' name="description" value="<%= event.description ? event.description : '' %>" /></td></tr>
+<tr><td>location:</td>      <td><input type='text' name="location" value="<%= event.location ? event.location : '' %>" /></td></tr>
+<tr><td>day:</td>           <td><input type='text' name="day" value="<%= event.day ? event.day : '' %>" /></td></tr>
+<tr><td>time:</td>          <td><input type='text' name="time" value="<%= event.time ? event.time : '' %>" /></td></tr>
+<tr><td>createdby:</td>     <td><%= event.createdby %><input type='hidden' name="createdby" value="<%= event.createdby ? event.createdby : '' %>" /></td></tr>
+<tr><td>attendees:</td>     <td><%= event.attendees %><input type='hidden' name="attendees" value="<%= event.attendees ? event.attendees : '' %>" /></td></tr>
+<tr><td></td>               <td><input class="btn btn-primary" type="submit" value="Submit"></td></tr>
+</form>
+<%= errorMessage %>

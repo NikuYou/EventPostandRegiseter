@@ -1,0 +1,19 @@
+<% layout('../layouts/mainlayout.ejs') -%>
+<br/><br/>
+<b>Event Listing</b>
+<br/><br/>
+<%if (reqInfo.authenticated) { %>
+<a class="btn btn-primary" href="/Event/Create">Create Event</a><br/><br/>
+<% } %>
+<table class="table">
+  <tr><td><b>ID</b></td><td><b>title</b></td><td><b>day</b></td><td><b>time</b></td><td></td></tr>
+<% for(var i=0; i < events.length; i++) { %>
+    <tr>
+      <td><%= events[i]._id %></td>
+      <td><%= events[i].title ? events[i].title:'' %></td>
+      <td><%= events[i].day.getFullYear() %>-<%= events[i].day.getMonth() %>-<%= events[i].day.getDate() %> </td>
+      <td><%= events[i].time ? events[i].time:'' %></td>
+      <td><a class="btn btn-primary" href='/Event/Detail?_id=<%= events[i]._id %>'>Detail</a></td>
+    </tr>
+ <% } %>
+</table>

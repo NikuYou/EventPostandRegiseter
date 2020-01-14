@@ -1,0 +1,16 @@
+<% layout('../layouts/mainlayout.ejs') -%>
+<p class="font-weight-bold">
+    Welcome to Ramon FanClub<br/>
+    Check your profile.
+</p>
+
+<br/><br/>
+<table class="table">
+    <tr><td>username:</td>                    <td><%= reqInfo.username %></td></tr>
+    <tr><td>email:</td>                       <td><%= reqInfo.email %></td></tr>
+    <tr><td>first name:</td>                  <td><%= user.firstName %></td></tr>
+    <tr><td>last name:</td>                   <td><%= user.lastName %></td></tr>
+    <tr><td>street address:</td>              <td><%= user.streetAddress %></td></tr>
+    <tr><td>phone number:</td>             <td><%= user.phoneNumber %></td></tr>
+    <tr><td></td>                             <td><a class="btn btn-primary" href = "/User/Edit">Edit</a></td></tr>
+</table>

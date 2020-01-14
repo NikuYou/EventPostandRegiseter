@@ -1,0 +1,124 @@
+<% layout('../layouts/mainlayout.ejs') -%>
+<br/><br/>
+<b>Event Detail</b>
+<table class="table">
+    <tr>
+        <td>
+            ID: 
+        </td>
+        <td>
+            <%= event._id %>  
+        </td>
+    </tr>
+    <tr>
+        <td>
+            title:
+        </td>
+        <td>
+            <%= event.title %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            description:
+        </td>
+        <td> 
+            <%= event.description ? event.description:'' %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            location:
+        </td>
+        <td>
+            <%= event.location ? event.location:'' %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            day:
+        </td>
+        <td>
+            <%= event.day ? event.day:'' %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            time:
+        </td>
+        <td>
+            <%= event.time ? event.time:'' %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            createdby:
+        </td>
+        <td>
+            <%= event.createdby ? event.createdby:'' %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            attendees:
+        </td>
+        <td>
+            <% if(reqInfo.authenticated) {%>
+            <table class="table">
+            <% for (var i=0; i < event.attendees.length; i++) { %>
+                <% for (var j=0; j < users.length; j++) { %>
+                    <% if (event.attendees[i] == users[j].username) { %>
+                        <tr><td><b>Name:</b></td><td><%= users[j].firstName %>  <%= users[j].lastName %></td>
+                        <td><b>Email:</b></td><td><%= users[j].email %></td></tr>
+                    <% }}} %>
+            </table>
+            <% }else{ %>
+                <p>please login in to check attendees</p>
+            <% } %>
+
+        </td>
+    </tr>
+
+
+<%if (reqInfo.username == event.createdby) { %>
+    <tr>
+        <td><a class="btn btn-primary" href='/Event/Edit?_id=<%= event._id %>'>Edit</a></td>
+        <td>
+            <form action="/Event/Delete" method="POST">
+                <input id="_id" name="_id" type="hidden" value=<%= event._id %> />
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+        </td>
+    </tr>
+<% } else { %>
+    <%if (reqInfo.authenticated) { %>
+        <%if (event.attendees.includes(reqInfo.username) == true){ %>
+            <tr>
+                <td></td>
+                <td>
+                    <form action="/Event/Withdraw" method="POST">
+                        <input id="_id" name="_id" type="hidden" value=<%= event._id%> />
+                        <input class="btn btn-danger" type="submit" value="Withdraw">
+                    </form>
+                </td>
+            </tr>
+
+        <% } else { %>
+    <tr>
+        <td></td>
+        <td>
+            <form action="/Event/Join" method="POST">
+                <input id="_id" name="_id" type="hidden" value=<%= event._id%> />
+                <input class="btn btn-primary" type="submit" value="Join">
+            </form>
+        </td>
+    </tr>
+        <% } %>
+    <% } else { %>
+    <tr>
+        please login to Edit or Join the event.
+    </tr>
+    <% } %>
+<% } %>
+
+</table>
